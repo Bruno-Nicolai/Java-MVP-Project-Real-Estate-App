@@ -4,15 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingTop="30dp"
-    tools:context=".view.fragment.SignUpTabFragment">
+    android:background="@drawable/login_or_signup_activity_bg"
+    tools:context=".view.activity.SignUpActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/login_or_signup_form_bg"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/signup_btn_next"
+        android:padding="36dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -58,29 +61,25 @@
             android:layout_marginEnd="24dp"
             android:background="@drawable/et_bg"
             android:drawableEnd="@drawable/ic_outline_remove_red_eye_24"
-            android:hint="@string/confirm_pwd"
+            android:hint="@string/pwd"
             android:inputType="textPassword"
             android:paddingStart="28dp"
             android:paddingTop="8dp"
             android:paddingEnd="12dp"
             android:paddingBottom="8dp" />
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/signup_btn_next"
+            style="@android:style/Widget.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="32dp"
+            android:background="@drawable/btn_orange_bg"
+            android:text="@string/signup_next"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
     </LinearLayout>
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/signup_btn_next"
-        style="@android:style/Widget.Button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:background="@drawable/btn_orange_bg"
-        android:text="@string/signup_next"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

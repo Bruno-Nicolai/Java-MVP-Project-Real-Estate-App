@@ -14,11 +14,7 @@
         android:theme="@style/Theme.Imob"
         tools:targetApi="33">
         <activity
-            android:name=".view.activity.DetailsActivity"
-            android:exported="false" >
-        </activity>
-        <activity
-            android:name=".view.activity.LoginOrSignupActivity"
+            android:name=".view.activity.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,12 +23,20 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".view.activity.SignUpActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".view.activity.DetailsActivity"
+            android:exported="false">
+        </activity>
+        <activity
             android:name=".view.activity.MainActivity"
-            android:exported="false" >
+            android:exported="false">
         </activity>
         <activity
             android:name=".view.activity.FirstSightActivity"
-            android:exported="false" >
+            android:exported="false">
         </activity>
     </application>
 
