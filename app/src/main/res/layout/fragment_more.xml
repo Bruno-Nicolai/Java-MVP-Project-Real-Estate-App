@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="32dp"
+    tools:context=".view.fragment.MoreFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="80dp">
+
+        <ImageView
+            android:id="@+id/iv_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/profile"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_welcome_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/welcome"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/iv_profile"
+            app:layout_constraintTop_toTopOf="@+id/iv_profile" />
+
+        <TextView
+            android:id="@+id/tv_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Bruno"
+            android:textColor="@color/black"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_profile"
+            app:layout_constraintStart_toStartOf="@+id/tv_welcome_label" />
+
+        <TextView
+            android:id="@+id/more_tv_currency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="**** **** **** "
+            android:textColor="@color/gray"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_welcome_label"
+            app:layout_constraintTop_toBottomOf="@+id/iv_profile" />
+
+        <TextView
+            android:id="@+id/tv_cc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="32dp"
+            android:text="1342"
+            android:textColor="@color/gray"
+            android:textSize="21sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/more_tv_currency"
+            app:layout_constraintStart_toEndOf="@+id/more_tv_currency" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        style="@style/Theme.Imob.MoreMenuOptions"
+        android:text="@string/personal" />
+
+    <TextView
+        style="@style/Theme.Imob.MoreMenuOptions"
+        android:text="@string/settings" />
+
+    <TextView
+        style="@style/Theme.Imob.MoreMenuOptions"
+        android:text="@string/payments" />
+
+    <TextView
+        style="@style/Theme.Imob.MoreMenuOptions"
+        android:text="@string/favorites" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="@string/log_out"
+        android:textColor="@color/red" />
+
+
+</LinearLayout>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.activity.FirstSightActivity">
+
+    <ImageView
+        android:id="@+id/iv_"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/pic_intro" />
+
+    <TextView
+        android:id="@+id/tv_"
+        app:layout_constraintTop_toBottomOf="@+id/iv_"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="wrap_content"
+        android:textColor="@color/black"
+        android:text="@string/app_intro"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tv__"
+        app:layout_constraintTop_toBottomOf="@+id/tv_"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="wrap_content"
+        android:textColor="@color/black"
+        android:text="@string/app_sub_intro"
+        android:textSize="15sp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_height="wrap_content"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_init"
+        style="@android:style/Widget.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/introduction_btn_background"
+        android:text="@string/start"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv__" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
