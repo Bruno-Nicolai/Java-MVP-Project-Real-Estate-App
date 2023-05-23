@@ -7,53 +7,54 @@
     tools:context=".view.activity.FirstSightActivity">
 
     <ImageView
-        android:id="@+id/iv_"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/iv_first_sight"
+        android:layout_width="match_parent"
+        android:layout_height="420dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/first_sight_banner"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/pic_intro" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_"
-        app:layout_constraintTop_toBottomOf="@+id/iv_"
-        app:layout_constraintStart_toStartOf="parent"
         android:layout_width="wrap_content"
-        android:textColor="@color/black"
-        android:text="@string/app_intro"
-        android:textStyle="bold"
-        android:textSize="24sp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_height="wrap_content"/>
+        android:layout_marginEnd="10dp"
+        android:text="@string/app_intro"
+        android:textColor="@color/black"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_first_sight" />
 
     <TextView
         android:id="@+id/tv__"
-        app:layout_constraintTop_toBottomOf="@+id/tv_"
-        app:layout_constraintStart_toStartOf="parent"
         android:layout_width="wrap_content"
-        android:textColor="@color/black"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="24dp"
         android:text="@string/app_sub_intro"
-        android:textSize="15sp"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="32dp"
-        android:layout_height="wrap_content"/>
+        android:textColor="@color/black"
+        android:textSize="21sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_"
+        app:layout_constraintTop_toBottomOf="@+id/tv_" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_init"
         style="@android:style/Widget.Button"
-        android:layout_width="match_parent"
+        android:layout_width="175dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/introduction_btn_background"
+        android:background="@drawable/first_sight_btn_orange_bg"
         android:text="@string/start"
         android:textColor="@color/white"
-        android:textStyle="bold"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv__" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

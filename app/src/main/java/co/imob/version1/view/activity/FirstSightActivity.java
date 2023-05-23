@@ -15,14 +15,16 @@ public class FirstSightActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_sight);
 
-        initView();
+        Button btn = (Button) findViewById(R.id.btn_init);
+        btn.setOnClickListener(view -> {
+            goToLoginActivity();
+        });
+
     }
 
-    private void initView() {
-        Button btn = findViewById(R.id.btn_init);
-        btn.setOnClickListener(view -> {
-            Intent intent = new Intent(FirstSightActivity.this, MainActivity.class);
-            startActivity(intent);
-        });
+    public void goToLoginActivity() {
+        Intent intent = new Intent(FirstSightActivity.this, LoginActivity.class);
+        startActivity(intent);
     }
+
 }
