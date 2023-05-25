@@ -8,19 +8,16 @@
     <fragment
         android:id="@+id/menu_home"
         android:name="co.imob.version1.view.fragment.HomeFragment"
-        android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/menu_gps"
         android:name="co.imob.version1.view.fragment.MapFragment"
-        android:label="fragment_map"
         tools:layout="@layout/fragment_map" />
 
     <fragment
         android:id="@+id/menu_more"
         android:name="co.imob.version1.view.fragment.MoreFragment"
-        android:label="fragment_more"
         tools:layout="@layout/fragment_more" />
 
 </navigation>

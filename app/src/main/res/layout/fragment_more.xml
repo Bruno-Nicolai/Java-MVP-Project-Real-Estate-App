@@ -70,21 +70,53 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        style="@style/Theme.Imob.MoreMenuOptions"
-        android:text="@string/personal" />
+    <androidx.cardview.widget.CardView
+        style="@style/Theme.Imob.MoreMenuOptionsCardView"
+        app:cardElevation="8dp"
+        app:contentPaddingBottom="10dp"
+        app:contentPaddingTop="10dp">
 
-    <TextView
-        style="@style/Theme.Imob.MoreMenuOptions"
-        android:text="@string/settings" />
+        <TextView
+            style="@style/Theme.Imob.MoreMenuOptions"
+            android:text="@string/personal" />
 
-    <TextView
-        style="@style/Theme.Imob.MoreMenuOptions"
-        android:text="@string/payments" />
+    </androidx.cardview.widget.CardView>
 
-    <TextView
-        style="@style/Theme.Imob.MoreMenuOptions"
-        android:text="@string/favorites" />
+    <androidx.cardview.widget.CardView
+        style="@style/Theme.Imob.MoreMenuOptionsCardView"
+        app:cardElevation="8dp"
+        app:contentPaddingBottom="10dp"
+        app:contentPaddingTop="10dp">
+
+        <TextView
+            style="@style/Theme.Imob.MoreMenuOptions"
+            android:text="@string/settings" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        style="@style/Theme.Imob.MoreMenuOptionsCardView"
+        app:cardElevation="8dp"
+        app:contentPaddingBottom="10dp"
+        app:contentPaddingTop="10dp">
+
+        <TextView
+            style="@style/Theme.Imob.MoreMenuOptions"
+            android:text="@string/payments" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        style="@style/Theme.Imob.MoreMenuOptionsCardView"
+        app:cardElevation="8dp"
+        app:contentPaddingBottom="10dp"
+        app:contentPaddingTop="10dp">
+
+        <TextView
+            style="@style/Theme.Imob.MoreMenuOptions"
+            android:text="@string/favorites" />
+
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:layout_width="wrap_content"

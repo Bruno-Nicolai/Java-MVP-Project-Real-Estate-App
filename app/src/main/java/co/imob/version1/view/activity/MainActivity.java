@@ -23,17 +23,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = findViewById(R.id.tb_main);
-        setSupportActionBar(toolbar);
 
         initNavigation();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_main_search, menu);
-        return true;
-    }
 
     public void initNavigation() {
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fcv_main);

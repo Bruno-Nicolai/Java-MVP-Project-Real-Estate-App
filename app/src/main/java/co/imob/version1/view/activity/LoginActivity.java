@@ -48,7 +48,6 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString("password", password);
         editor.apply();
 
-//        https://www.youtube.com/watch?v=fBaeU2sFTvM
     }
 
 }
