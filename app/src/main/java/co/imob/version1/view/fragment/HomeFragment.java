@@ -31,22 +31,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.toolbar_main_search, menu);
-
-//        MenuItem menuItem = menu.findItem(R.menu.toolbar_main_search);
-//        SearchView searchView = (SearchView) menuItem.getActionView();
-//        searchView.setQueryHint("Looking for...");
-//
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                return false;
-//            }
-//        });
     }
 
     @Override
@@ -64,10 +48,7 @@ public class HomeFragment extends Fragment {
         NavigationUI.setupWithNavController(toolbar, navController, appBarConfig);
 
         toolbar.setOnMenuItemClickListener(item -> {
-            if (item.getItemId() == R.id.search) {
-                return true;
-            }
-            return false;
+            return item.getItemId() == R.id.search;
         });
 
     }
