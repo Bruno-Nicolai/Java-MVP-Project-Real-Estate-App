@@ -34,7 +34,7 @@
             app:layout_constraintTop_toTopOf="@+id/iv_picture">
 
             <TextView
-                android:id="@+id/tv_title"
+                android:id="@+id/main_tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -53,12 +53,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:text="@string/currency"
             android:textColor="@color/black"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/iv_picture"
-            app:layout_constraintTop_toBottomOf="@+id/iv_picture"
-            android:text="@string/currency" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_picture" />
 
         <TextView
             android:id="@+id/tv_price"
@@ -77,11 +77,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
+            android:textColor="@color/orange"
             app:layout_constraintBottom_toBottomOf="@+id/tv_price"
             app:layout_constraintStart_toEndOf="@+id/tv_price"
-            tools:text="| 20% discount"
-            android:textColor="@color/orange"
-            />
+            tools:text="| 20% discount" />
 
         <ImageView
             android:id="@+id/iv_favorite"
@@ -100,27 +99,52 @@
             android:layout_height="12dp"
             android:layout_marginEnd="12dp"
             android:src="@drawable/marker"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_address"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_address_city"
             app:layout_constraintEnd_toStartOf="@+id/tv_currency"
             app:layout_constraintStart_toStartOf="@+id/tv_currency" />
 
         <TextView
-            android:id="@+id/tv_address"
+            android:id="@+id/tv_address_city"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="21dp"
             android:layout_marginBottom="10dp"
             android:ellipsize="end"
-            android:maxLength="60"
-            android:maxLines="1"
             android:textColor="@color/black"
             android:textSize="11sp"
             app:layout_constraintBottom_toTopOf="@+id/tv_description"
-            app:layout_constraintEnd_toEndOf="@+id/iv_favorite"
             app:layout_constraintStart_toEndOf="@+id/iv_marker"
             app:layout_constraintTop_toBottomOf="@+id/tv_price"
-            tools:text="Endereço * Endereço * Endereço * Endereço * Endereço * Endereço * Endereço * Endereço * " />
+            tools:text="San Francisco" />
+
+        <TextView
+            android:id="@+id/tv_address_comma"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="21dp"
+            android:layout_marginBottom="10dp"
+            android:ellipsize="end"
+            android:text="@string/comma"
+            android:textColor="@color/black"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_description"
+            app:layout_constraintStart_toEndOf="@+id/tv_address_city"
+            app:layout_constraintTop_toBottomOf="@+id/tv_price" />
+
+        <TextView
+            android:id="@+id/tv_address_street"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="21dp"
+            android:layout_marginBottom="10dp"
+            android:ellipsize="end"
+            android:textColor="@color/black"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_description"
+            app:layout_constraintStart_toEndOf="@+id/tv_address_comma"
+            app:layout_constraintTop_toBottomOf="@+id/tv_price"
+            tools:text="Juan Herrera St." />
 
         <TextView
             android:id="@+id/tv_description"
@@ -134,8 +158,8 @@
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/iv_favorite"
-            app:layout_constraintStart_toStartOf="@+id/tv_price"
-            app:layout_constraintTop_toBottomOf="@+id/tv_address"
+            app:layout_constraintStart_toStartOf="@+id/tv_currency"
+            app:layout_constraintTop_toBottomOf="@+id/iv_marker"
             tools:text="Descrição Descrição Descrição Descrição Descrição Descrição Descrição Descrição Descrição Descrição Descrição Descrição" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

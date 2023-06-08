@@ -1,7 +1,6 @@
-package co.imob.version1.presentation;
+package co.imob.version1.presenter;
 
 import android.location.Location;
-import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

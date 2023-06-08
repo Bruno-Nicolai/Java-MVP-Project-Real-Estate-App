@@ -1,6 +1,4 @@
-package co.imob.version1.presentation;
-
-import android.os.Bundle;
+package co.imob.version1.presenter;
 
 import androidx.annotation.NonNull;
 

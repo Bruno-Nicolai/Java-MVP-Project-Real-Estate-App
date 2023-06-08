@@ -8,7 +8,10 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
+import java.util.List;
 
 import co.imob.version1.R;
 import co.imob.version1.model.ViewPagerItem;
@@ -16,6 +19,7 @@ import co.imob.version1.model.ViewPagerItem;
 public class DetailsViewPagerAdapter extends RecyclerView.Adapter<DetailsViewPagerAdapter.ViewHolder> {
 
     ArrayList<ViewPagerItem> viewPagerItemArrayList;
+
     public DetailsViewPagerAdapter(ArrayList<ViewPagerItem> viewPagerItemArrayList) {
         this.viewPagerItemArrayList = viewPagerItemArrayList;
     }
@@ -32,7 +36,10 @@ public class DetailsViewPagerAdapter extends RecyclerView.Adapter<DetailsViewPag
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         ViewPagerItem viewPagerItem = viewPagerItemArrayList.get(position);
-        holder.imageView.setImageResource(viewPagerItem.imageId);
+        List<String> imageUrls = viewPagerItem.getImageUrls();
+        for (String imageUrl : imageUrls) {
+            Picasso.get().load(imageUrl).into(holder.imageView);
+        }
 
     }
 

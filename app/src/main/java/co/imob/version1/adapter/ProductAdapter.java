@@ -2,7 +2,6 @@ package co.imob.version1.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import com.squareup.picasso.Picasso;
+
+import java.io.Serializable;
+import java.util.List;
 
 import co.imob.version1.R;
 import co.imob.version1.model.Product;
@@ -20,10 +22,10 @@ import co.imob.version1.view.activity.DetailsActivity;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
 
-    ArrayList<Product> products;
+    List<Product> products;
     Context context;
 
-    public ProductAdapter(ArrayList<Product> products) {
+    public ProductAdapter(List<Product> products) {
         this.products = products;
     }
 
@@ -37,17 +39,22 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Product currentProduct = products.get(position);
 
-        holder.itemView.getResources().getIdentifier(products.get(position).getPicture(), "drawable", holder.itemView.getContext().getPackageName());
+        String imageUrl = currentProduct.getPictures().get(0);
+        Picasso.get().load(imageUrl).into((ImageView) holder.view.findViewById(R.id.iv_picture));
 
-        holder.title.setText(products.get(position).getTitle());
-        holder.price.setText(products.get(position).getPrice());
-        holder.address.setText(products.get(position).getAddress());
-        holder.description.setText(products.get(position).getDescription());
+        ((TextView) holder.view.findViewById(R.id.main_tv_title)).setText(currentProduct.getTitle());
+        ((TextView) holder.view.findViewById(R.id.tv_price)).setText(currentProduct.getPrice());
+        ((TextView) holder.view.findViewById(R.id.tv_address_city)).setText(currentProduct.getAddress().getCity());
+        ((TextView) holder.view.findViewById(R.id.tv_address_street)).setText(currentProduct.getAddress().getStreet());
+        ((TextView) holder.view.findViewById(R.id.tv_description)).setText(currentProduct.getDescription());
 
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(context, DetailsActivity.class);
-            intent.putExtra("object", (Parcelable) products.get(position));
+            Product selectedProduct = currentProduct;
+            intent.putExtra("product", (Serializable) selectedProduct);
+
             context.startActivity(intent);
         });
 
@@ -60,16 +67,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView pic;
-        TextView title, price, address, description;
+        public View view;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            pic = itemView.findViewById(R.id.iv_picture);
-            title = itemView.findViewById(R.id.tv_title);
-            price = itemView.findViewById(R.id.tv_price);
-            address = itemView.findViewById(R.id.tv_address);
-            description = itemView.findViewById(R.id.tv_description);
+            this.view = itemView;
         }
     }
 }

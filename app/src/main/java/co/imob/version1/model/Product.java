@@ -1,74 +1,100 @@
 package co.imob.version1.model;
 
+import java.util.List;
+
 public class Product {
 
-    private String title, address, description, picture, price;
-    private int bed, bath;
+    private int id;
+    private String title;
+    private Address address;
+    private Geo geo;
+    private String description;
+    private List<String> pictures;
+    private int bed;
+    private int bath;
+    private boolean security;
+    private boolean garage;
+    private boolean rent;
+    private int extent;
+    private String price;
 
-    public Product(String title, String address, String description, String picture, int bed, int bath, String price) {
+    public Product(int id, String title, Address address, Geo geo, String description, List<String> pictures, int bed, int bath, boolean security, boolean garage, boolean rent, int extent, String price) {
+        this.id = id;
         this.title = title;
         this.address = address;
+        this.geo = geo;
         this.description = description;
-        this.picture = picture;
+        this.pictures = pictures;
         this.bed = bed;
         this.bath = bath;
+        this.security = security;
+        this.garage = garage;
+        this.rent = rent;
+        this.extent = extent;
         this.price = price;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public Geo getGeo() {
+        return geo;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getPicture() {
-        return picture;
-    }
-
-    public void setPicture(String picture) {
-        this.picture = picture;
+    public List<String> getPictures() {
+        return pictures;
     }
 
     public int getBed() {
         return bed;
     }
 
-    public void setBed(int bed) {
-        this.bed = bed;
-    }
-
     public int getBath() {
         return bath;
     }
 
-    public void setBath(int bath) {
-        this.bath = bath;
+    public boolean isSecurity() {
+        return security;
+    }
+
+    public boolean isGarage() {
+        return garage;
+    }
+
+    public boolean isRent() {
+        return rent;
+    }
+
+    public int getExtent() {
+        return extent;
     }
 
     public String getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
+    public void setGeo(Geo geo) {
+        this.geo = geo;
+    }
+
+    public void setPictures(List<String> pictures) {
+        this.pictures = pictures;
+    }
 }

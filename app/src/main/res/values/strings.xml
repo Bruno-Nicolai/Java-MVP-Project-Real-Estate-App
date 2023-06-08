@@ -49,6 +49,8 @@
 
     <!-- Labels -->
     <string name="currency">R$ </string>
+    <string name="comma">, </string>
+    <string name="m2">m²</string>
     <string name="description">Description</string>
     <string name="beds">beds</string>
     <string name="baths">baths</string>

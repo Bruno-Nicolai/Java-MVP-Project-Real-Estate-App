@@ -30,8 +30,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
 import co.imob.version1.R;
-import co.imob.version1.presentation.MapContract;
-import co.imob.version1.presentation.MapPresenter;
+import co.imob.version1.presenter.MapContract;
+import co.imob.version1.presenter.MapPresenter;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback, MapContract.View {
 
