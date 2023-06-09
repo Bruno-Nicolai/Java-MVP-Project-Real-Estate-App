@@ -11,7 +11,7 @@ public interface DetailsContract {
 
         public void displayProduct(Product product);
 
-//        public void setDetailsViewPagerAdapter(ProductAdapter adapter);
+        public void showDialog();
 
     }
 

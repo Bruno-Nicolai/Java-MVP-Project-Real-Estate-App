@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="Theme.Imob.DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/slide_in_bottom</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_bottom</item>
+    </style>
+
+    <style name="Theme.Imob.BottomSheet" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bottomsheet_shape</item>
+        <item name="behavior_peekHeight">300dp</item>
+    </style>
+
+    <style name="Theme.Imob.AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Theme.Imob.BottomSheet</item>
+    </style>
+
     <style name="Theme.Imob.MoreMenuOptions">
         <item name="android:layout_marginTop">16dp</item>
         <item name="android:gravity">start</item>

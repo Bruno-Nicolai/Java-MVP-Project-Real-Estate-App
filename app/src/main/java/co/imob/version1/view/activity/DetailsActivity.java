@@ -1,10 +1,18 @@
 package co.imob.version1.view.activity;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -31,6 +39,9 @@ public class DetailsActivity extends AppCompatActivity implements DetailsContrac
     private int extent, beds, baths;
     private CheckBox checkBoxVisibility;
 
+    private Button btn_buy, btn_pay, btn_offer;
+    private Dialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +60,12 @@ public class DetailsActivity extends AppCompatActivity implements DetailsContrac
         });
 
         displayProduct(selectedProduct);
+
+
+        btn_buy = findViewById(R.id.btn_buy);
+        btn_buy.setOnClickListener(view -> {
+            showDialog();
+        });
 
     }
 
@@ -101,6 +118,36 @@ public class DetailsActivity extends AppCompatActivity implements DetailsContrac
         description = product.getDescription();
         TextView tvDesc = findViewById(R.id.details_tv_desc_text);
         tvDesc.setText(description);
+
+    }
+
+    @Override
+    public void showDialog() {
+        dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.bottom_sheet);
+
+        btn_pay = dialog.findViewById(R.id.btn_pay);
+        btn_pay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(DetailsActivity.this, "PAY", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btn_offer = dialog.findViewById(R.id.btn_offer);
+        btn_offer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(DetailsActivity.this, "OFFER", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        dialog.show();
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().getAttributes().windowAnimations = R.style.Theme_Imob_DialogAnimation;
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
 
     }
 
