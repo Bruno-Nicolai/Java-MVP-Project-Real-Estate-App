@@ -1,5 +1,6 @@
 package co.imob.version1.view.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -42,6 +43,10 @@ public class DetailsActivity extends AppCompatActivity implements DetailsContrac
 
         toolbar = findViewById(R.id.tb_pictures);
         setSupportActionBar(toolbar);
+
+        toolbar.setNavigationOnClickListener(view -> {
+            finish();
+        });
 
         displayProduct(selectedProduct);
 

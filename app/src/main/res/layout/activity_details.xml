@@ -14,7 +14,8 @@
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="360dp"
-            app:layout_scrollFlags="scroll|snap|snapMargins">
+            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
+            app:titleEnabled="false">
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/vp_pictures"
@@ -32,10 +33,12 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="@android:color/transparent"
                 app:layout_collapseMode="pin"
+                app:navigationIcon="@drawable/ic_baseline_arrow_back_icon_24"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                app:title="@null" />
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
+                app:title="@string/go_back"
+                app:titleTextColor="@color/white" />
 
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
