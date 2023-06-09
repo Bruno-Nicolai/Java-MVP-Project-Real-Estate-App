@@ -4,6 +4,8 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,11 +41,6 @@ public class HomeFragment extends Fragment implements HomeContract.View {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
@@ -62,37 +59,50 @@ public class HomeFragment extends Fragment implements HomeContract.View {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
 
-        toolbar.setOnMenuItemClickListener(item -> {
-            if (item.getItemId() == R.id.search) {
+        MenuItem searchItem = menu.findItem(R.id.search);
+        searchItem.setIcon(R.drawable.search_icon); // Set the icon here
+    }
 
-                searchItem = view.findViewById(R.id.search);
-                searchView = (SearchView) searchItem.getActionView();
 
-                SearchManager searchManager = (SearchManager) requireActivity().getSystemService(Context.SEARCH_SERVICE);
-                searchView.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().getComponentName()));
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
 
-                searchView.setImeOptions(EditorInfo.IME_ACTION_GO);
+        inflater.inflate(R.menu.toolbar_main_search, menu);
 
-                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                    @Override
-                    public boolean onQueryTextSubmit(String query) {
-                        return false;
-                    }
+        searchItem = menu.findItem(R.id.search);
+        searchView = (SearchView) searchItem.getActionView();
 
-                    @Override
-                    public boolean onQueryTextChange(String query) {
-                        homeAdapter.getFilter().filter(query);
-                        return false;
-                    }
-                });
+        SearchManager searchManager = (SearchManager) requireActivity().getSystemService(Context.SEARCH_SERVICE);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().getComponentName()));
 
-                return true;
+        searchView.setImeOptions(EditorInfo.IME_ACTION_GO);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
             }
-            return false;
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                homeAdapter.getFilter().filter(query);
+                return false;
+            }
         });
 
+        super.onCreateOptionsMenu(menu, inflater);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.search) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

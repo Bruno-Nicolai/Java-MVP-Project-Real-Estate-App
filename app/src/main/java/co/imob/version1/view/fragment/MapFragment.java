@@ -108,11 +108,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, MapCont
 
     @Override
     public void showLocationUpdatesResult(@NonNull LocationResult locationResult) {
-//        for (Location location : locationResult.getLocations()) {
-//            if (location != null) {
-//                Toast.makeText(requireContext(), "Current location is " + location.getLongitude() + ", " + location.getLatitude(), Toast.LENGTH_LONG).show();
-//            }
-//        }
     }
 
     @Override
@@ -129,12 +124,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, MapCont
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         this.googleMap = googleMap;
-//        getCurrentLocation();
+        getCurrentLocation();
         presenter.onMapReady();
 
-//        LatLng marker = new LatLng(-30.032253651009807, -51.123031109739536);
-//        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker, 15));
-//        googleMap.addMarker(new MarkerOptions().title("Your position").position(marker));
     }
 
     @Override
@@ -161,21 +153,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, MapCont
         LocationCallback locationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(@NonNull LocationResult locationResult) {
-//                Toast.makeText(
-//                        requireContext(),
-//                        "location result is " + locationResult,
-//                        Toast.LENGTH_LONG
-//                ).show();
-//
-//                for (Location location : locationResult.getLocations()) {
-//                    if (location != null) {
-//                        Toast.makeText(
-//                                requireContext(),
-//                                "Current location is " + location.getLatitude() + ", " + location.getLongitude(),
-//                                Toast.LENGTH_LONG
-//                        ).show();
-//                    }
-//                }
+                super.onLocationResult(locationResult);
             }
         };
 
