@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,19 +16,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import co.imob.version1.R;
 import co.imob.version1.model.Product;
 import co.imob.version1.view.activity.DetailsActivity;
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> implements /*View.OnClickListener,*/ Filterable {
 
     List<Product> products;
+    List<Product> filteredProducts;
     Context context;
+
+//    private View.OnClickListener listener;
 
     public ProductAdapter(List<Product> products) {
         this.products = products;
+        filteredProducts = new ArrayList<>(products);
     }
 
     @NonNull
@@ -34,6 +41,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product, parent, false);
         context = parent.getContext();
+//        itemView.setOnClickListener(this);
         return new ViewHolder(itemView);
     }
 
@@ -50,13 +58,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         ((TextView) holder.view.findViewById(R.id.tv_address_street)).setText(currentProduct.getAddress().getStreet());
         ((TextView) holder.view.findViewById(R.id.tv_description)).setText(currentProduct.getDescription());
 
-        holder.itemView.setOnClickListener(view -> {
+        holder.view.setOnClickListener(view -> {
             Intent intent = new Intent(context, DetailsActivity.class);
-            Product selectedProduct = currentProduct;
-            intent.putExtra("product", (Serializable) selectedProduct);
-
+            intent.putExtra("product_id", currentProduct.getId());
             context.startActivity(intent);
         });
+
 
     }
 
@@ -64,6 +71,55 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public int getItemCount() {
         return products.size();
     }
+
+    @Override
+    public Filter getFilter() {
+        return filter;
+    }
+
+    private Filter filter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+
+            List<Product> filteredList = new ArrayList<>();
+
+            if (constraint == null || constraint.length() == 0) {
+                filteredList.addAll(filteredProducts);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+                for (Product product : filteredProducts) {
+                    if (product.getTitle().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(product);
+                    } else if (product.getAddress().getStreet().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(product);
+                    } else if (product.getAddress().getCity().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(product);
+                    }
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+
+            products.clear();
+            products.addAll((List) results.values);
+            notifyDataSetChanged();
+
+        }
+    };
+
+//    @Override
+//    public void onClick(View v) {
+//        if (listener != null) {
+//            listener.onClick(v);
+//        }
+//    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -74,4 +130,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             this.view = itemView;
         }
     }
+
+//    public void setOnItemClickListener(View.OnClickListener listener) {
+//        this.listener = listener;
+//    }
 }

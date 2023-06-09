@@ -1,5 +1,6 @@
 package co.imob.version1.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,42 +11,36 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import co.imob.version1.R;
-import co.imob.version1.model.ViewPagerItem;
 
 public class DetailsViewPagerAdapter extends RecyclerView.Adapter<DetailsViewPagerAdapter.ViewHolder> {
 
-    ArrayList<ViewPagerItem> viewPagerItemArrayList;
+    private Context context;
+    private List<String> imageUrls;
 
-    public DetailsViewPagerAdapter(ArrayList<ViewPagerItem> viewPagerItemArrayList) {
-        this.viewPagerItemArrayList = viewPagerItemArrayList;
+    public DetailsViewPagerAdapter(Context context, List<String> imageUrls) {
+        this.context = context;
+        this.imageUrls = imageUrls;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.viewpager_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewpager_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
-        ViewPagerItem viewPagerItem = viewPagerItemArrayList.get(position);
-        List<String> imageUrls = viewPagerItem.getImageUrls();
-        for (String imageUrl : imageUrls) {
-            Picasso.get().load(imageUrl).into(holder.imageView);
-        }
-
+        String imageUrl = imageUrls.get(position);
+        Picasso.get().load(imageUrl).into(holder.imageView);
     }
 
     @Override
     public int getItemCount() {
-        return viewPagerItemArrayList.size();
+        return imageUrls.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

@@ -92,10 +92,10 @@ public class ProductService {
                     json.getInt("bed"),
                     json.getInt("bath"),
                     json.getBoolean("security"),
-                    json.getBoolean("garage"),
-                    json.getBoolean("rent"),
+                    json.isNull("garage"),
+                    json.isNull("rent"),
                     json.getInt("extent"),
-                    json.getString("website")
+                    json.getString("price")
             );
             if (json.has("address")) {
                 JSONObject jsonAddress = json.getJSONObject("address");

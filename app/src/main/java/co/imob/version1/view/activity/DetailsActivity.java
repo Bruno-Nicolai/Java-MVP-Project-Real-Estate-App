@@ -8,18 +8,20 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import co.imob.version1.R;
 import co.imob.version1.adapter.DetailsViewPagerAdapter;
 import co.imob.version1.model.Product;
-import co.imob.version1.model.ViewPagerItem;
+import co.imob.version1.presenter.DetailsContract;
+import co.imob.version1.presenter.DetailsPresenter;
 
-public class DetailsActivity extends AppCompatActivity {
+public class DetailsActivity extends AppCompatActivity implements DetailsContract.View {
 
-    ViewPager2 viewPager;
-    ArrayList<ViewPagerItem> viewPagerItemArrayList;
+    private DetailsContract.Presenter presenter;
+    private ViewPager2 viewPager;
+    private List<String> imageUrls;
+    private DetailsViewPagerAdapter viewPagerAdapter;
 
     private String price, city, zip, title, description;
     private int extent, beds, baths;
@@ -30,17 +32,22 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
-        Product selectedProduct = (Product) getIntent().getSerializableExtra("product");
+        int productId = getIntent().getIntExtra("product_id", -1);
+        presenter = new DetailsPresenter(this);
+
+        Product selectedProduct = presenter.getProduct(productId);
+        displayProduct(selectedProduct);
+
+    }
+
+    @Override
+    public void displayProduct(Product product) {
+
+        imageUrls = product.getPictures();
 
         viewPager = findViewById(R.id.vp_pictures);
-        viewPagerItemArrayList = new ArrayList<>();
-
-        List<String> pictures = selectedProduct.getPictures();
-        viewPagerItemArrayList = new ArrayList<>();
-        viewPagerItemArrayList.add(new ViewPagerItem(pictures));
-
-        DetailsViewPagerAdapter detailsViewPagerAdapter = new DetailsViewPagerAdapter(viewPagerItemArrayList);
-        viewPager.setAdapter(detailsViewPagerAdapter);
+        viewPagerAdapter = new DetailsViewPagerAdapter(this, imageUrls);
+        viewPager.setAdapter(viewPagerAdapter);
 
         viewPager.setClipToPadding(false);
         viewPager.setClipChildren(false);
@@ -48,41 +55,41 @@ public class DetailsActivity extends AppCompatActivity {
         viewPager.getChildAt(0).setOverScrollMode(View.OVER_SCROLL_NEVER);
 
 
-        city = selectedProduct.getAddress().getCity();
+        city = product.getAddress().getCity();
         TextView tvCity = findViewById(R.id.details_tv_address_city);
         tvCity.setText(city);
 
-        zip = selectedProduct.getAddress().getZipcode();
+        zip = product.getAddress().getZipcode();
         TextView tvZipcode = findViewById(R.id.details_tv_address_zipcode);
         tvZipcode.setText(zip);
 
-        title = selectedProduct.getTitle();
+        title = product.getTitle();
         TextView tvTitle = findViewById(R.id.details_tv_title);
         tvTitle.setText(title);
 
-        extent = selectedProduct.getExtent();
+        extent = product.getExtent();
         TextView tvExtent = findViewById(R.id.tv_product_extent);
         tvExtent.setText(String.valueOf(extent));
 
-        price = selectedProduct.getPrice();
-        TextView tvPrice = findViewById(R.id.tv_price);
+        price = product.getPrice();
+        TextView tvPrice = findViewById(R.id.details_tv_price);
         tvPrice.setText(price);
 
-        beds = selectedProduct.getBed();
+        beds = product.getBed();
         TextView tvBeds = findViewById(R.id.tv_beds_nbr);
         tvBeds.setText(String.valueOf(beds));
 
-        baths = selectedProduct.getBath();
+        baths = product.getBath();
         TextView tvBaths = findViewById(R.id.tv_baths_nbr);
         tvBaths.setText(String.valueOf(baths));
 
         checkBoxVisibility = findViewById(R.id.check_alarms);
-        checkBoxVisibility.setChecked(selectedProduct.isSecurity());
+        checkBoxVisibility.setChecked(product.isSecurity());
 
-        description = selectedProduct.getDescription();
+        description = product.getDescription();
         TextView tvDesc = findViewById(R.id.details_tv_desc_text);
         tvDesc.setText(description);
 
-
     }
+
 }

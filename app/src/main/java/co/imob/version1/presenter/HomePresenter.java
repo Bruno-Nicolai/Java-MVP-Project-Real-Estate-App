@@ -23,4 +23,5 @@ public class HomePresenter implements HomeContract.Presenter {
             view.setHomeAdapter(adapter);
         });
     }
+
 }
