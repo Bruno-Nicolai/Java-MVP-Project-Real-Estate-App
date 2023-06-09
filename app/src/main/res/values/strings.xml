@@ -16,6 +16,7 @@
     <string name="payments">Payments</string>
     <string name="favorites">Favorites</string>
     <string name="log_out">Logout</string>
+    <string name="go_back">Back</string>
 
     <!-- Seach Bar -->
     <string name="search">Search</string>

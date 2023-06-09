@@ -1,50 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".view.activity.DetailsActivity">
 
-    <ScrollView
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_buy"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp">
+            android:layout_height="360dp"
+            app:layout_scrollFlags="scroll|snap|snapMargins">
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/vp_pictures"
                 android:layout_width="match_parent"
-                android:layout_height="360dp"
+                android:layout_height="match_parent"
+                app:contentScrim="@color/white"
+                app:layout_collapseMode="parallax"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <View
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:background="@drawable/circle"
-                app:layout_constraintBottom_toBottomOf="@+id/iv_heart"
-                app:layout_constraintEnd_toEndOf="@+id/iv_heart"
-                app:layout_constraintStart_toStartOf="@+id/iv_heart"
-                app:layout_constraintTop_toTopOf="@+id/iv_heart" />
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/tb_pictures"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@android:color/transparent"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:title="@null" />
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/iv_heart"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:layout_marginTop="-30dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginEnd="24dp"
                 android:src="@drawable/ic_baseline_favorites_24"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/vp_pictures"
+                app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/black" />
 
             <ImageView
@@ -55,7 +67,7 @@
                 android:layout_marginTop="30dp"
                 android:src="@drawable/marker"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/vp_pictures"
+                app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/fav_color" />
 
             <TextView
@@ -67,7 +79,6 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/details_iv_marker"
-                app:layout_constraintHorizontal_bias="0.111"
                 app:layout_constraintStart_toEndOf="@+id/details_iv_marker"
                 tools:text="San Francisco" />
 
@@ -80,19 +91,17 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/details_iv_marker"
-                app:layout_constraintHorizontal_bias="0.111"
                 app:layout_constraintStart_toEndOf="@+id/details_tv_address_city" />
 
             <TextView
                 android:id="@+id/details_tv_address_zipcode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/details_iv_marker"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.111"
                 app:layout_constraintStart_toEndOf="@+id/details_tv_address_comma"
                 tools:text="94200110" />
 
@@ -160,6 +169,7 @@
                 tools:text="000.000.000,00" />
 
             <LinearLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -335,28 +345,30 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:padding="15dp"
                     android:layout_marginBottom="40dp"
+                    android:padding="15dp"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     tools:text="description description description description description description" />
 
             </LinearLayout>
 
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_buy"
+                style="@android:style/Widget.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="@drawable/btn_orange_bg"
+                android:text="@string/buy"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/linearLayout" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </ScrollView>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_buy"
-        style="@android:style/Widget.Button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:background="@drawable/btn_orange_bg"
-        android:text="@string/buy"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    </androidx.core.widget.NestedScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

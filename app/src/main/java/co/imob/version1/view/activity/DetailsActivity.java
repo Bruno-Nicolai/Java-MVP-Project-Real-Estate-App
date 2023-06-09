@@ -6,6 +6,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager2.widget.ViewPager2;
 
 import java.util.List;
@@ -19,7 +20,9 @@ import co.imob.version1.presenter.DetailsPresenter;
 public class DetailsActivity extends AppCompatActivity implements DetailsContract.View {
 
     private DetailsContract.Presenter presenter;
+
     private ViewPager2 viewPager;
+    private Toolbar toolbar;
     private List<String> imageUrls;
     private DetailsViewPagerAdapter viewPagerAdapter;
 
@@ -36,6 +39,10 @@ public class DetailsActivity extends AppCompatActivity implements DetailsContrac
         presenter = new DetailsPresenter(this);
 
         Product selectedProduct = presenter.getProduct(productId);
+
+        toolbar = findViewById(R.id.tb_pictures);
+        setSupportActionBar(toolbar);
+
         displayProduct(selectedProduct);
 
     }
