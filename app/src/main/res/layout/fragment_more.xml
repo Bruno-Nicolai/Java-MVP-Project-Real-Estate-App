@@ -17,7 +17,7 @@
             android:id="@+id/iv_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/profile"
+            android:src="@tools:sample/avatars"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,24 +36,24 @@
             android:id="@+id/tv_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Bruno"
+            tools:text="Bruno"
             android:textColor="@color/black"
             android:textSize="28sp"
             android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/tv_welcome_label"
             app:layout_constraintBottom_toBottomOf="@+id/iv_profile"
             app:layout_constraintStart_toStartOf="@+id/tv_welcome_label" />
 
         <TextView
-            android:id="@+id/more_tv_currency"
+            android:id="@+id/more_tv_hidden_cc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="**** **** **** "
+            android:text="@string/secret"
             android:textColor="@color/gray"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="@+id/tv_welcome_label"
-            app:layout_constraintTop_toBottomOf="@+id/iv_profile" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_username" />
 
         <TextView
             android:id="@+id/tv_cc"
@@ -65,8 +65,8 @@
             android:textColor="@color/gray"
             android:textSize="21sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/more_tv_currency"
-            app:layout_constraintStart_toEndOf="@+id/more_tv_currency" />
+            app:layout_constraintBottom_toBottomOf="@+id/more_tv_hidden_cc"
+            app:layout_constraintStart_toEndOf="@+id/more_tv_hidden_cc" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -20,7 +20,7 @@
             android:layout_height="360dp"
             android:layout_marginTop="3dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/pic1"
+            tools:src="@tools:sample/backgrounds/scenic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

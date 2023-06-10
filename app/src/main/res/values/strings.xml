@@ -3,25 +3,44 @@
     <string name="preference_file_key">co.imob.version1.PREFERENCE_FILE_KEY</string>
 
     <!-- App Name -->
-    <string name="app_name">Imob</string>
+    <string name="app_name">Imobiliária</string>
 
-    <!-- App Introduction -->
+    <!-- Labels -->
+    <string name="welcome">Welcome,</string>
+    <string name="comma">, </string>
+    <string name="m2">m²</string>
+    <string name="currency">R$ </string>
+    <string name="description">Description</string>
+    <string name="beds">beds</string>
+    <string name="baths">baths</string>
+    <string name="alarms">sec. syst.</string>
+    <string name="choose">What works better for you?</string>
+
+    <!-- Hints -->
+    <string name="name">Your Name</string>
+    <string name="email">Your Email</string>
+    <string name="pwd">Password</string>
+    <string name="confirm_pwd">Confirm Password</string>
+    <string name="hint_et_search">Searching for…</string>
+
+    <!-- App - Introduction -->
     <string name="app_intro">Find your\ndream house\nat the best\nprice</string>
     <string name="app_sub_intro">We\'re here for every home ownership</string>
     <string name="start">Let\'s start</string>
 
-    <!-- App More Options -->
-    <string name="personal">Personal Information</string>
-    <string name="settings">Settings</string>
-    <string name="payments">Payments</string>
-    <string name="favorites">Favorites</string>
-    <string name="log_out">Logout</string>
-    <string name="go_back">Back</string>
+    <!-- App - Login -->
+    <string name="login">Login</string>
+    <string name="signup">Sign Up</string>
+    <string name="already_user">Already an user?</string>
+    <string name="not_user">Don\'t have an account?</string>
+
+    <!-- App - Home -->
+    <string name="buy">Buy now</string>
+    <string name="opt1">Pay the Price</string>
+    <string name="opt2">Make an Offer</string>
 
     <!-- Search Bar -->
     <string name="search">Search</string>
-    <string name="hint_et_search">Searching for…</string>
-
     <string name="house">House</string>
     <string name="apartment">Apartment</string>
     <string name="hotel">Hotel</string>
@@ -31,33 +50,19 @@
     <string name="popular">Popular</string>
     <string name="see_all">See All</string>
 
+    <!-- App - More -->
+    <string name="secret">**** **** ****</string>
+    <!-- App - More Options -->
+    <string name="personal">Personal Information</string>
+    <string name="settings">Settings</string>
+    <string name="payments">Payments</string>
+    <string name="favorites">Favorites</string>
+    <string name="log_out">Logout</string>
+    <string name="go_back">Back</string>
+
     <!-- Bottom Menu -->
     <string name="home">Home</string>
     <string name="more">More</string>
     <string name="gps">Map</string>
-
-    <!-- Actions -->
-    <string name="buy">Buy now</string>
-    <string name="login_next">Login</string>
-    <string name="signup_next">SignUp Now</string>
-
-    <string name="opt1">Pay the Price</string>
-    <string name="opt2">Make an Offer</string>
-
-    <!-- Hints -->
-    <string name="email">Email</string>
-    <string name="confirm_pwd">Confirm Password</string>
-    <string name="pwd">Password</string>
-
-    <!-- Labels -->
-    <string name="currency">R$ </string>
-    <string name="comma">, </string>
-    <string name="m2">m²</string>
-    <string name="description">Description</string>
-    <string name="beds">beds</string>
-    <string name="baths">baths</string>
-    <string name="alarms">sec. syst.</string>
-    <string name="welcome">Welcome,</string>
-    <string name="choose">What works better for you?</string>
 
 </resources>

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "471471946594",
+    "project_id": "project-2023-1-android",
+    "storage_bucket": "project-2023-1-android.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:471471946594:android:059dba58abc8cb5e20ca3b",
+        "android_client_info": {
+          "package_name": "co.imob.version1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOD1KOdpwWhMj5KxR2r8fVxKURwUDOvig"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
