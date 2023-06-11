@@ -13,9 +13,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.squareup.picasso.Picasso;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,17 +24,20 @@ import co.imob.version1.R;
 import co.imob.version1.model.Product;
 import co.imob.version1.view.activity.DetailsActivity;
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> implements /*View.OnClickListener,*/ Filterable {
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> implements Filterable {
 
     List<Product> products;
     List<Product> filteredProducts;
-    Context context;
 
-//    private View.OnClickListener listener;
+    private ChipGroup selectedChips;
+    private List<String> selectedChipsTexts;
 
-    public ProductAdapter(List<Product> products) {
+    private Context context;
+
+    public ProductAdapter(List<Product> products, List<String> selectedChipTexts) {
         this.products = products;
         filteredProducts = new ArrayList<>(products);
+        this.selectedChipsTexts = selectedChipTexts;
     }
 
     @NonNull
@@ -41,7 +45,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product, parent, false);
         context = parent.getContext();
-//        itemView.setOnClickListener(this);
         return new ViewHolder(itemView);
     }
 
@@ -74,52 +77,73 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     @Override
     public Filter getFilter() {
+        Filter filter = new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+
+                FilterResults filterResults = new FilterResults();
+                List<Product> filteredList = new ArrayList<>();
+
+                if (constraint == null || constraint.length() == 0) {
+                    // No search text, include all products
+                    filteredList.addAll(filteredProducts);
+                } else {
+                    String filterPattern = constraint.toString().toLowerCase().trim();
+                    for (Product product : filteredProducts) {
+                        if (productMatchesSearch(product, filterPattern) && productMatchesChips(product, selectedChipsTexts)) {
+                            filteredList.add(product);
+                        }
+                    }
+                }
+
+                filterResults.values = filteredList;
+                filterResults.count = filteredList.size();
+                return filterResults;
+
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+
+                products.clear();
+                products.addAll((List) results.values);
+                notifyDataSetChanged();
+
+            }
+        };
+
         return filter;
     }
 
-    private Filter filter = new Filter() {
-        @Override
-        protected FilterResults performFiltering(CharSequence constraint) {
+    private boolean productMatchesSearch(Product product, String filterPattern) {
 
-            List<Product> filteredList = new ArrayList<>();
+        filterPattern = filterPattern.toLowerCase();
 
-            if (constraint == null || constraint.length() == 0) {
-                filteredList.addAll(filteredProducts);
-            } else {
-                String filterPattern = constraint.toString().toLowerCase().trim();
-                for (Product product : filteredProducts) {
-                    if (product.getTitle().toLowerCase().contains(filterPattern)) {
-                        filteredList.add(product);
-                    } else if (product.getAddress().getStreet().toLowerCase().contains(filterPattern)) {
-                        filteredList.add(product);
-                    } else if (product.getAddress().getCity().toLowerCase().contains(filterPattern)) {
-                        filteredList.add(product);
-                    }
-                }
+        if (product.getTitle().toLowerCase().contains(filterPattern)) return true;
+        if (product.getAddress().getStreet().toLowerCase().contains(filterPattern)) return true;
+        return product.getAddress().getCity().toLowerCase().contains(filterPattern);
+
+    }
+
+    private boolean productMatchesChips(Product product, List<String> selectedChipsTexts) {
+
+        if (selectedChipsTexts == null || selectedChipsTexts.size() == 0) {
+            return true;
+        }
+
+        for (String chipText : selectedChipsTexts) {
+            if (chipText.equals(product.getTitle())) {
+                return true;
             }
-
-            FilterResults results = new FilterResults();
-            results.values = filteredList;
-            return results;
-
         }
 
-        @Override
-        protected void publishResults(CharSequence constraint, FilterResults results) {
+        return false;
 
-            products.clear();
-            products.addAll((List) results.values);
-            notifyDataSetChanged();
+    }
 
-        }
-    };
-
-//    @Override
-//    public void onClick(View v) {
-//        if (listener != null) {
-//            listener.onClick(v);
-//        }
-//    }
+    public void setSelectedChipsTexts(List<String> selectedChipsTexts) {
+        this.selectedChipsTexts = selectedChipsTexts;
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -131,7 +155,4 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         }
     }
 
-//    public void setOnItemClickListener(View.OnClickListener listener) {
-//        this.listener = listener;
-//    }
 }
