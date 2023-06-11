@@ -20,12 +20,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
-
-import java.util.List;
-import java.util.Objects;
 
 import co.imob.version1.R;
 import co.imob.version1.adapter.ProductAdapter;
@@ -40,6 +38,8 @@ public class HomeFragment extends Fragment implements HomeContract.View {
     private Toolbar toolbar;
     private MenuItem searchItem;
     private SearchView searchView;
+
+    private SwipeRefreshLayout swipe;
 
     private TextView tvQuickFilter;
     private ChipGroup chipGroup;
@@ -62,6 +62,12 @@ public class HomeFragment extends Fragment implements HomeContract.View {
         toolbar = view.findViewById(R.id.tb_main);
         AppCompatActivity activity = (AppCompatActivity) requireActivity();
         activity.setSupportActionBar(toolbar);
+
+        swipe = view.findViewById(R.id.swipe_to_refresh);
+        swipe.setOnRefreshListener(() -> {
+            presenter.getAllProducts();
+            swipe.setRefreshing(false);
+        });
 
         tvQuickFilter = view.findViewById(R.id.tv_quick_filter);
         tvQuickFilter.setVisibility(View.GONE);
@@ -101,7 +107,8 @@ public class HomeFragment extends Fragment implements HomeContract.View {
         if (chipApartment.isChecked()) searchFromChips.append(chipApartment.getText()).append(" ");
         if (chipGarage.isChecked()) searchFromChips.append(chipGarage.getText()).append(" ");
         if (chipOffice.isChecked()) searchFromChips.append(chipOffice.getText()).append(" ");
-        if (chipLandAndLots.isChecked()) searchFromChips.append(chipLandAndLots.getText()).append(" ");
+        if (chipLandAndLots.isChecked())
+            searchFromChips.append(chipLandAndLots.getText()).append(" ");
 
         String chipContent = searchFromChips.toString().trim();
         searchView.setQuery(chipContent, false);

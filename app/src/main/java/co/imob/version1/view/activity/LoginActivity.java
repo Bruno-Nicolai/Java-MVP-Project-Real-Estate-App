@@ -22,8 +22,6 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     private TextView loginTvRedirect;
     private Button loginBtn;
 
-    private DatabaseReference dbRef;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,97 +50,17 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         });
 
     }
-/*
-    public void saveData() {
-        String email = loginEtEmail.getText().toString();
-        String password = loginEtPassword.getText().toString();
-
-        SharedPreferences sharedPreferences = getSharedPreferences(
-                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("email", email);
-        editor.putString("password", password);
-        editor.apply();
-    }
-
-    public boolean validateEmail() {
-        String value = loginEtEmail.getText().toString();
-        if (value.isEmpty()) {
-            loginEtEmail.setError("Invalid Email Address.");
-            return false;
-        } else {
-            loginEtEmail.setError(null);
-            return true;
-        }
-    }
-
-    public boolean validatePassword() {
-        String value = loginEtPassword.getText().toString();
-        if (value.isEmpty()) {
-            loginEtPassword.setError("Invalid Password!");
-            return false;
-        } else {
-            loginEtPassword.setError(null);
-            return true;
-        }
-    }
-
-    public void checkUser() {
-        String email = loginEtEmail.getText().toString().trim();
-        String password = loginEtPassword.getText().toString().trim();
-
-        dbRef = FirebaseDatabase.getInstance().getReference("users");
-        Query checkUserDb = dbRef.orderByChild("email").equalTo(email);
-        checkUserDb.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    loginEtEmail.setError(null);
-                    String pwdFromDb = snapshot.child(email).child("email").getValue(String.class);
-
-                    if (!Objects.equals(pwdFromDb, password)) {
-                        loginEtPassword.setError(null);
-                        goToMainActivity();
-                    } else {
-                        loginEtPassword.setError("Enter your password again, please.");
-                        loginEtPassword.requestFocus();
-                    }
-
-                } else {
-                    loginEtEmail.setError("Email does not exist.");
-                    loginEtEmail.requestFocus();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-    }
-
-    public void goToMainActivity() {
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
-    public void goToSignupActivity() {
-        Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
-        startActivity(intent);
-        finish();
-    }*/
 
     @Override
     public void showEmailError(String errorMessage) {
         loginEtEmail.setError(errorMessage);
+        loginEtEmail.requestFocus();
     }
 
     @Override
     public void showPasswordError(String errorMessage) {
         loginEtPassword.setError(errorMessage);
+        loginEtPassword.requestFocus();
     }
 
     @Override
@@ -156,6 +74,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     public void goToSignupActivity() {
         Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
         startActivity(intent);
+        finish();
     }
 
     @Override

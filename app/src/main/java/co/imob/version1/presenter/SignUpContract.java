@@ -12,12 +12,13 @@ public interface SignUpContract {
         public void showConfirmPasswordError(String errorMessage);
         public void goToMainActivity();
         public void goToLoginActivity();
+        public void showToast(String message);
     }
 
     interface Presenter {
-        public void validateSignUpForm(String name, String email, String password, String confirmPassword);
+        public boolean validateSignUpForm(String name, String email, String password, String confirmPassword);
 
-        public void saveUser(Auth user, SharedPreferences sharedPreferences);
+        public void saveUser(Auth user);
 
     }
 }

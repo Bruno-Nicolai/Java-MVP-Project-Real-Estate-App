@@ -1,8 +1,6 @@
 package co.imob.version1.view.activity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,9 +8,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import co.imob.version1.R;
 import co.imob.version1.model.Auth;
@@ -26,7 +21,6 @@ public class SignUpActivity extends AppCompatActivity implements SignUpContract.
     private EditText signupEtName, signupEtEmail, signupEtPassword, signupEtConfirmPassword;
     private TextView signupTvRedirect;
     private Button signupBtn;
-    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +29,6 @@ public class SignUpActivity extends AppCompatActivity implements SignUpContract.
 
         presenter = new SignUpPresenter(this);
 
-        sharedPreferences = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         signupEtName = findViewById(R.id.signup_et_name);
         signupEtEmail = findViewById(R.id.signup_et_email);
         signupEtPassword = findViewById(R.id.signup_et_password);
@@ -49,10 +42,11 @@ public class SignUpActivity extends AppCompatActivity implements SignUpContract.
             String password = signupEtPassword.getText().toString();
             String confirmPassword = signupEtConfirmPassword.getText().toString();
 
-            presenter.validateSignUpForm(name, email, password, confirmPassword);
-            presenter.saveUser(new Auth(name, email, password), sharedPreferences);
-
-            Toast.makeText(this, "Welcome, " + name + "! You are now a new member.", Toast.LENGTH_LONG).show();
+            if (!presenter.validateSignUpForm(name, email, password, confirmPassword)) {
+                showToast("Try Again");
+            } else {
+                presenter.saveUser(new Auth(name, email, password));
+            }
 
         });
 
@@ -83,16 +77,22 @@ public class SignUpActivity extends AppCompatActivity implements SignUpContract.
         signupEtConfirmPassword.setError(errorMessage);
     }
 
+    @Override
     public void goToMainActivity() {
         Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
     }
 
+    @Override
     public void goToLoginActivity() {
         Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
     }
 
+    @Override
+    public void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
 }
