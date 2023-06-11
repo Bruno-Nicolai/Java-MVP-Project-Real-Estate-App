@@ -1,5 +1,7 @@
 package co.imob.version1.presenter;
 
+import android.content.SharedPreferences;
+
 import co.imob.version1.service.LoginCallback;
 import co.imob.version1.service.LoginService;
 

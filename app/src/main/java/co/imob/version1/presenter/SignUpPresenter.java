@@ -2,9 +2,6 @@ package co.imob.version1.presenter;
 
 import android.content.SharedPreferences;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 import co.imob.version1.model.Auth;
 import co.imob.version1.service.SignUpCallback;
 import co.imob.version1.service.SignUpService;
@@ -49,8 +46,15 @@ public class SignUpPresenter implements SignUpContract.Presenter, SignUpCallback
     }
 
     @Override
-    public void saveUser(Auth user) {
+    public void saveUser(Auth user, SharedPreferences sharedPreferences) {
         signUpService.registerUser(user.getName(), user.getEmail(), user.getPassword(), this);
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("name", user.getName());
+        editor.putString("email", user.getEmail());
+        editor.putString("password", user.getPassword());
+        editor.apply();
+
     }
 
     @Override

@@ -10,7 +10,6 @@ public interface SignUpContract {
         public void showEmailError(String errorMessage);
         public void showPasswordError(String errorMessage);
         public void showConfirmPasswordError(String errorMessage);
-        public void goToMainActivity();
         public void goToLoginActivity();
         public void showToast(String message);
     }
@@ -18,7 +17,7 @@ public interface SignUpContract {
     interface Presenter {
         public boolean validateSignUpForm(String name, String email, String password, String confirmPassword);
 
-        public void saveUser(Auth user);
+        public void saveUser(Auth user, SharedPreferences sharedPreferences);
 
     }
 }

@@ -1,14 +1,14 @@
 package co.imob.version1.view.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.firebase.database.DatabaseReference;
 
 import co.imob.version1.R;
 import co.imob.version1.presenter.LoginContract;
@@ -17,6 +17,8 @@ import co.imob.version1.presenter.LoginPresenter;
 public class LoginActivity extends AppCompatActivity implements LoginContract.View {
 
     private LoginContract.Presenter presenter;
+
+    private SharedPreferences sharedPreferences;
 
     private EditText loginEtEmail, loginEtPassword;
     private TextView loginTvRedirect;
@@ -29,6 +31,8 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
         presenter = new LoginPresenter(this);
 
+        sharedPreferences = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+
         loginEtEmail = findViewById(R.id.login_et_email);
         loginEtPassword = findViewById(R.id.login_et_password);
 
@@ -37,6 +41,17 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
             String email = loginEtEmail.getText().toString();
             String password = loginEtPassword.getText().toString();
+
+            if (email.isEmpty() && password.isEmpty()) {
+                String savedEmail = sharedPreferences.getString("email", "");
+                String savedPassword = sharedPreferences.getString("password", "");
+                if (!savedEmail.isEmpty() && !savedPassword.isEmpty()) {
+                    loginEtEmail.setText(savedEmail);
+                    loginEtPassword.setText(savedPassword);
+                    email = savedEmail;
+                    password = savedPassword;
+                }
+            }
 
             presenter.validateEmail(email);
             presenter.validatePassword(password);

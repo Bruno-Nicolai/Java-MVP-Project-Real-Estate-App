@@ -1,6 +1,8 @@
 package co.imob.version1.view.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +20,8 @@ public class SignUpActivity extends AppCompatActivity implements SignUpContract.
 
     private SignUpContract.Presenter presenter;
 
+    private SharedPreferences sharedPreferences;
+
     private EditText signupEtName, signupEtEmail, signupEtPassword, signupEtConfirmPassword;
     private TextView signupTvRedirect;
     private Button signupBtn;
@@ -28,6 +32,8 @@ public class SignUpActivity extends AppCompatActivity implements SignUpContract.
         setContentView(R.layout.activity_sign_up);
 
         presenter = new SignUpPresenter(this);
+
+        sharedPreferences = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
 
         signupEtName = findViewById(R.id.signup_et_name);
         signupEtEmail = findViewById(R.id.signup_et_email);
@@ -45,7 +51,7 @@ public class SignUpActivity extends AppCompatActivity implements SignUpContract.
             if (!presenter.validateSignUpForm(name, email, password, confirmPassword)) {
                 showToast("Try Again");
             } else {
-                presenter.saveUser(new Auth(name, email, password));
+                presenter.saveUser(new Auth(name, email, password), sharedPreferences);
             }
 
         });
@@ -75,13 +81,6 @@ public class SignUpActivity extends AppCompatActivity implements SignUpContract.
     @Override
     public void showConfirmPasswordError(String errorMessage) {
         signupEtConfirmPassword.setError(errorMessage);
-    }
-
-    @Override
-    public void goToMainActivity() {
-        Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
-        startActivity(intent);
-        finish();
     }
 
     @Override
