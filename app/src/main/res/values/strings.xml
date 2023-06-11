@@ -3,7 +3,7 @@
     <string name="preference_file_key">co.imob.version1.PREFERENCE_FILE_KEY</string>
 
     <!-- App Name -->
-    <string name="app_name">Imobiliária</string>
+    <string name="app_name">Real Estate App</string>
 
     <!-- Labels -->
     <string name="welcome">Welcome,</string>
@@ -41,9 +41,10 @@
 
     <!-- Search Bar -->
     <string name="search">Search</string>
+    <string name="quick_filter">Quick Filter</string>
     <string name="house">House</string>
     <string name="apartment">Apartment</string>
-    <string name="hotel">Hotel</string>
+    <string name="land_lots">Land And Lots</string>
     <string name="garage">Garage</string>
     <string name="office">Office</string>
 
