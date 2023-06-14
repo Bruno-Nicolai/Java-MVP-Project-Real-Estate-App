@@ -22,10 +22,14 @@ public interface HomeContract {
 
         public void setHomeAdapter(ProductAdapter adapter);
 
+//        public void onLikedStatusChanged(int productId, boolean isLiked);
+
     }
 
     interface Presenter {
         public void getAllProducts();
+
+//        public void setLikedStatusChangeListener();
 
         public List<String> getSelectedChipContent();
     }

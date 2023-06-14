@@ -2,6 +2,7 @@ package co.imob.version1.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.chip.Chip;
-import com.google.android.material.chip.ChipGroup;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -28,8 +28,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     List<Product> products;
     List<Product> filteredProducts;
+//    List<Integer> likedProducts;
 
-    private ChipGroup selectedChips;
     private List<String> selectedChipsTexts;
 
     private Context context;
@@ -37,6 +37,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public ProductAdapter(List<Product> products, List<String> selectedChipTexts) {
         this.products = products;
         filteredProducts = new ArrayList<>(products);
+//        likedProducts = new ArrayList<>();
         this.selectedChipsTexts = selectedChipTexts;
     }
 
@@ -54,6 +55,17 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
         String imageUrl = currentProduct.getPictures().get(0);
         Picasso.get().load(imageUrl).into((ImageView) holder.view.findViewById(R.id.iv_picture));
+
+/*
+        if (likedProducts.contains(currentProduct.getId())) {
+            ((ImageView) holder.view.findViewById(R.id.iv_heart)).setImageResource(R.drawable.ic_baseline_favorite_24);
+            ((ImageView) holder.view.findViewById(R.id.iv_heart))
+                    .setColorFilter(ContextCompat.getColor(holder.itemView.getContext(), R.color.fav_color), PorterDuff.Mode.SRC_IN);
+        } else {
+            ((ImageView) holder.view.findViewById(R.id.iv_heart)).setImageResource(R.drawable.ic_baseline_favorites_24);
+            ((ImageView) holder.view.findViewById(R.id.iv_heart)).setColorFilter(null);
+        }
+*/
 
         ((TextView) holder.view.findViewById(R.id.main_tv_title)).setText(currentProduct.getTitle());
         ((TextView) holder.view.findViewById(R.id.tv_price)).setText(currentProduct.getPrice());
@@ -144,6 +156,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public void setSelectedChipsTexts(List<String> selectedChipsTexts) {
         this.selectedChipsTexts = selectedChipsTexts;
     }
+
+/*
+    public void setLikedProducts(List<Integer> likedProducts) {
+        this.likedProducts = likedProducts;
+        notifyDataSetChanged();
+    }
+*/
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 

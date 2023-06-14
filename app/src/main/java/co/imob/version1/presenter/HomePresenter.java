@@ -10,23 +10,50 @@ import co.imob.version1.adapter.ProductAdapter;
 import co.imob.version1.model.Product;
 import co.imob.version1.repository.ProductRepository;
 import co.imob.version1.service.ProductService;
+import co.imob.version1.view.fragment.HomeFragment;
 
 public class HomePresenter implements HomeContract.Presenter {
 
     private HomeContract.View view;
+//    private HomeFragment.LikedStatusChangeListener likedStatusChangeListener;
 
     public HomePresenter(HomeContract.View view) {
         this.view = view;
     }
+
+
+/*
+    @Override
+    public void setLikedStatusChangeListener(HomeFragment.LikedStatusChangeListener listener) {
+        likedStatusChangeListener = listener;
+    }
+*/
 
     @Override
     public void getAllProducts() {
         ProductService.getAllProducts(view.getContext(), () -> {
             List<Product> products = ProductRepository.getInstance().getProducts();
             ProductAdapter adapter = new ProductAdapter(products, getSelectedChipContent());
+//            adapter.setLikedProducts(getLikedProducts());
+//            adapter.setLikedStatusChangeListener((productId, isLiked) -> {
+//                updateLikedStatus(productId, isLiked);
+//            });
             view.setHomeAdapter(adapter);
         });
     }
+
+/*
+    private List<Integer> getLikedProducts() {
+        return LikedProductsRepository.getInstance().getLikedProducts();
+    }
+
+    private void updateLikedStatus(int productId, boolean isLiked) {
+        if (likedStatusChangeListener != null) {
+            likedStatusChangeListener.onLikedStatusChanged(productId, isLiked);
+        }
+    }
+*/
+
 
     @Override
     public List<String> getSelectedChipContent() {

@@ -1,8 +1,9 @@
 package co.imob.version1.view.activity;
 
 import android.app.Dialog;
-import android.content.Intent;
+import android.content.Context;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -11,11 +12,13 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
 import java.util.List;
@@ -39,6 +42,7 @@ public class DetailsActivity extends AppCompatActivity implements DetailsContrac
     private int extent, beds, baths;
     private CheckBox checkBoxVisibility;
 
+    private ImageView btn_like;
     private Button btn_buy, btn_pay, btn_offer;
     private Dialog dialog;
 
@@ -60,6 +64,11 @@ public class DetailsActivity extends AppCompatActivity implements DetailsContrac
         });
 
         displayProduct(selectedProduct);
+        btn_like = findViewById(R.id.iv_heart);
+        btn_like.setOnClickListener(view -> {
+            boolean isLiked = presenter.changeLike();
+            likeAction(isLiked);
+        });
 
 
         btn_buy = findViewById(R.id.btn_buy);
@@ -122,6 +131,17 @@ public class DetailsActivity extends AppCompatActivity implements DetailsContrac
     }
 
     @Override
+    public void likeAction(boolean isLiked) {
+        if (isLiked) {
+            btn_like.setImageResource(R.drawable.ic_baseline_favorite_24);
+            btn_like.setColorFilter(ContextCompat.getColor(this, R.color.fav_color), PorterDuff.Mode.SRC_IN);
+        } else {
+            btn_like.setImageResource(R.drawable.ic_baseline_favorites_24);
+            btn_like.setColorFilter(null);
+        }
+    }
+
+    @Override
     public void showDialog() {
         dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -149,6 +169,11 @@ public class DetailsActivity extends AppCompatActivity implements DetailsContrac
         dialog.getWindow().getAttributes().windowAnimations = R.style.Theme_Imob_DialogAnimation;
         dialog.getWindow().setGravity(Gravity.BOTTOM);
 
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
     }
 
 }

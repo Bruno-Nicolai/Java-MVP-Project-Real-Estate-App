@@ -30,7 +30,7 @@ import co.imob.version1.adapter.ProductAdapter;
 import co.imob.version1.presenter.HomeContract;
 import co.imob.version1.presenter.HomePresenter;
 
-public class HomeFragment extends Fragment implements HomeContract.View {
+public class HomeFragment extends Fragment implements HomeContract.View/*, HomeFragment.LikedStatusChangeListener*/ {
 
     private RecyclerView rv_home;
     private ProductAdapter homeAdapter;
@@ -46,6 +46,12 @@ public class HomeFragment extends Fragment implements HomeContract.View {
 
     private Chip chipHouse, chipApartment, chipGarage, chipOffice, chipLandAndLots;
 
+/*
+    public interface LikedStatusChangeListener {
+        void onLikedStatusChanged(int productId, boolean isLiked);
+    }
+*/
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
@@ -57,6 +63,7 @@ public class HomeFragment extends Fragment implements HomeContract.View {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         presenter = new HomePresenter(this);
+//        presenter.setLikedStatusChangeListener(this);
         presenter.getAllProducts();
 
         toolbar = view.findViewById(R.id.tb_main);
@@ -201,5 +208,14 @@ public class HomeFragment extends Fragment implements HomeContract.View {
         homeAdapter.setSelectedChipsTexts(presenter.getSelectedChipContent());
         rv_home.setAdapter(homeAdapter);
     }
+
+/*
+    @Override
+    public void onLikedStatusChanged(int productId, boolean isLiked) {
+        if (homeAdapter != null) {
+            homeAdapter.setLikedProducts(likedProducts);
+        }
+    }
+*/
 
 }
