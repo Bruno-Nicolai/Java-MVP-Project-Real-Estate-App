@@ -76,22 +76,30 @@
                 android:paddingEnd="12dp"
                 android:paddingBottom="8dp" />
 
-            <EditText
-                android:id="@+id/signup_et_confirm_password"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/et_bg"
-                android:drawableEnd="@drawable/ic_outline_remove_red_eye_24"
-                android:hint="@string/confirm_pwd"
-                android:inputType="textPassword"
-                android:paddingStart="28dp"
-                android:paddingTop="8dp"
-                android:paddingEnd="12dp"
-                android:paddingBottom="8dp" />
+                app:passwordToggleEnabled="true">
+
+                <EditText
+                    android:id="@+id/signup_et_confirm_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/et_bg"
+                    android:drawableEnd="@drawable/ic_outline_remove_red_eye_24"
+                    android:hint="@string/confirm_pwd"
+                    android:inputType="textPassword"
+                    android:paddingStart="28dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="12dp"
+                    android:paddingBottom="8dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/signup_btn_next"

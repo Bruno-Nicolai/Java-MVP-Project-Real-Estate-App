@@ -6,6 +6,7 @@
     <string name="app_name">Real Estate App</string>
 
     <!-- Labels -->
+    <string name="remember_me">Remember me</string>
     <string name="welcome">Welcome,</string>
     <string name="comma">, </string>
     <string name="m2">m²</string>

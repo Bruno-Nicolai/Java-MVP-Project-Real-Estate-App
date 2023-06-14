@@ -1,9 +1,16 @@
 package co.imob.version1.presenter;
 
-import android.content.SharedPreferences;
+import android.content.Context;
 
 public interface LoginContract {
     interface View {
+
+        void setRememberMeChecked(boolean isChecked);
+
+        void setEmail(String savedEmail);
+
+        void setPassword(String savedPassword);
+
         void showEmailError(String errorMessage);
 
         void showPasswordError(String errorMessage);
@@ -11,6 +18,8 @@ public interface LoginContract {
         void goToMainActivity();
 
         void goToSignupActivity();
+
+        Context getContext();
 
     }
 
@@ -20,6 +29,12 @@ public interface LoginContract {
         void validateEmail(String email);
 
         void validatePassword(String password);
+
+        void saveCredentials(String email, String password);
+
+        void clearCredentials();
+
+        void loadSavedCredentials();
 
         void onDestroy();
     }

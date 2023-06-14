@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -20,6 +21,8 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
     private SharedPreferences sharedPreferences;
 
+    private CheckBox loginCheckboxRememberMe;
+
     private EditText loginEtEmail, loginEtPassword;
     private TextView loginTvRedirect;
     private Button loginBtn;
@@ -31,10 +34,22 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
         presenter = new LoginPresenter(this);
 
-        sharedPreferences = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+//        sharedPreferences = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+//        savedEmail = sharedPreferences.getString("email", "");
+//        savedPassword = sharedPreferences.getString("password", "");
 
         loginEtEmail = findViewById(R.id.login_et_email);
         loginEtPassword = findViewById(R.id.login_et_password);
+        loginCheckboxRememberMe = findViewById(R.id.login_check_remember_me);
+
+//        if (email.isEmpty() && password.isEmpty() && loginCheckboxRememberMe.isChecked()) {
+//            if (!savedEmail.isEmpty() && !savedPassword.isEmpty()) {
+//                loginEtEmail.setText(savedEmail);
+//                loginEtPassword.setText(savedPassword);
+//                email = savedEmail;
+//                password = savedPassword;
+//            }
+//        }
 
         loginBtn = findViewById(R.id.login_btn_next);
         loginBtn.setOnClickListener(view -> {
@@ -42,20 +57,15 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
             String email = loginEtEmail.getText().toString();
             String password = loginEtPassword.getText().toString();
 
-            if (email.isEmpty() && password.isEmpty()) {
-                String savedEmail = sharedPreferences.getString("email", "");
-                String savedPassword = sharedPreferences.getString("password", "");
-                if (!savedEmail.isEmpty() && !savedPassword.isEmpty()) {
-                    loginEtEmail.setText(savedEmail);
-                    loginEtPassword.setText(savedPassword);
-                    email = savedEmail;
-                    password = savedPassword;
-                }
-            }
-
             presenter.validateEmail(email);
             presenter.validatePassword(password);
             presenter.loginUser(email, password);
+
+            if (loginCheckboxRememberMe.isChecked()) {
+                presenter.saveCredentials(email, password);
+            } else {
+                presenter.clearCredentials();
+            }
 
         });
 
@@ -64,6 +74,23 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
             goToSignupActivity();
         });
 
+        presenter.loadSavedCredentials();
+
+    }
+
+    @Override
+    public void setRememberMeChecked(boolean isChecked) {
+        loginCheckboxRememberMe.setChecked(isChecked);
+    }
+
+    @Override
+    public void setEmail(String savedEmail) {
+        loginEtEmail.setText(savedEmail);
+    }
+
+    @Override
+    public void setPassword(String savedPassword) {
+        loginEtPassword.setText(savedPassword);
     }
 
     @Override
@@ -90,6 +117,11 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
     }
 
     @Override
