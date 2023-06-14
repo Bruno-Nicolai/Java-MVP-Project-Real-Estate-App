@@ -1,23 +1,30 @@
 package co.imob.version1.presenter;
 
-import android.content.SharedPreferences;
+import android.content.Context;
 
 import co.imob.version1.model.Auth;
 
 public interface SignUpContract {
     interface View {
-        public void showNameError(String errorMessage);
-        public void showEmailError(String errorMessage);
-        public void showPasswordError(String errorMessage);
-        public void showConfirmPasswordError(String errorMessage);
-        public void goToLoginActivity();
-        public void showToast(String message);
+        void showNameError(String errorMessage);
+
+        void showEmailError(String errorMessage);
+
+        void showPasswordError(String errorMessage);
+
+        void showConfirmPasswordError(String errorMessage);
+
+        void goToLoginActivity();
+
+        void showToast(String message);
+
+        Context getContext();
     }
 
     interface Presenter {
-        public boolean validateSignUpForm(String name, String email, String password, String confirmPassword);
+        boolean validateSignUpForm(String name, String email, String password, String confirmPassword);
 
-        public void saveUser(Auth user, SharedPreferences sharedPreferences);
+        void saveUser(Auth user);
 
     }
 }

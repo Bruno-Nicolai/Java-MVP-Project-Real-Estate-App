@@ -51,7 +51,7 @@ public class SignUpActivity extends AppCompatActivity implements SignUpContract.
             if (!presenter.validateSignUpForm(name, email, password, confirmPassword)) {
                 showToast("Try Again");
             } else {
-                presenter.saveUser(new Auth(name, email, password), sharedPreferences);
+                presenter.saveUser(new Auth(name, email, password));
             }
 
         });
@@ -93,5 +93,10 @@ public class SignUpActivity extends AppCompatActivity implements SignUpContract.
     @Override
     public void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
     }
 }

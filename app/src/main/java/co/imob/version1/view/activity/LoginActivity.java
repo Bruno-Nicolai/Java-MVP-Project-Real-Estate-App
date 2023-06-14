@@ -2,7 +2,6 @@ package co.imob.version1.view.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -19,8 +18,6 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
     private LoginContract.Presenter presenter;
 
-    private SharedPreferences sharedPreferences;
-
     private CheckBox loginCheckboxRememberMe;
 
     private EditText loginEtEmail, loginEtPassword;
@@ -34,22 +31,9 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
         presenter = new LoginPresenter(this);
 
-//        sharedPreferences = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-//        savedEmail = sharedPreferences.getString("email", "");
-//        savedPassword = sharedPreferences.getString("password", "");
-
         loginEtEmail = findViewById(R.id.login_et_email);
         loginEtPassword = findViewById(R.id.login_et_password);
         loginCheckboxRememberMe = findViewById(R.id.login_check_remember_me);
-
-//        if (email.isEmpty() && password.isEmpty() && loginCheckboxRememberMe.isChecked()) {
-//            if (!savedEmail.isEmpty() && !savedPassword.isEmpty()) {
-//                loginEtEmail.setText(savedEmail);
-//                loginEtPassword.setText(savedPassword);
-//                email = savedEmail;
-//                password = savedPassword;
-//            }
-//        }
 
         loginBtn = findViewById(R.id.login_btn_next);
         loginBtn.setOnClickListener(view -> {

@@ -1,7 +1,9 @@
 package co.imob.version1.presenter;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 
+import co.imob.version1.R;
 import co.imob.version1.model.Auth;
 import co.imob.version1.service.SignUpCallback;
 import co.imob.version1.service.SignUpService;
@@ -10,10 +12,13 @@ public class SignUpPresenter implements SignUpContract.Presenter, SignUpCallback
 
     private SignUpContract.View view;
     private SignUpService signUpService;
+    private SharedPreferences sharedPreferences;
 
     public SignUpPresenter(SignUpContract.View view) {
         this.view = view;
         signUpService = new SignUpService();
+        sharedPreferences = view.getContext()
+                .getSharedPreferences(view.getContext().getString(R.string.preference_file_key), Context.MODE_PRIVATE);
     }
 
     @Override
@@ -46,7 +51,7 @@ public class SignUpPresenter implements SignUpContract.Presenter, SignUpCallback
     }
 
     @Override
-    public void saveUser(Auth user, SharedPreferences sharedPreferences) {
+    public void saveUser(Auth user) {
         signUpService.registerUser(user.getName(), user.getEmail(), user.getPassword(), this);
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
