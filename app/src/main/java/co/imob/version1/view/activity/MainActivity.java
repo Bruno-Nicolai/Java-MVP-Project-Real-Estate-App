@@ -25,14 +25,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        SharedPreferences sharedPreferences = getSharedPreferences(
-//                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-
-//        String savedEmail = sharedPreferences.getString("email", "");
-//        String savedPassword = sharedPreferences.getString("password", "");
-
-
-
         initNavigation();
     }
 

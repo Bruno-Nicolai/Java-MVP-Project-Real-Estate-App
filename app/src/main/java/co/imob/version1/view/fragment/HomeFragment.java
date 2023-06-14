@@ -88,12 +88,6 @@ public class HomeFragment extends Fragment implements HomeContract.View {
         chipGarage.setOnCheckedChangeListener((buttonView, isChecked) -> updateSearchViewFromChips());
         chipOffice.setOnCheckedChangeListener((buttonView, isChecked) -> updateSearchViewFromChips());
         chipLandAndLots.setOnCheckedChangeListener((buttonView, isChecked) -> updateSearchViewFromChips());
-//        .setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                updateSearchViewFromChips();
-//            }
-//        });
 
         return view;
 
@@ -103,12 +97,11 @@ public class HomeFragment extends Fragment implements HomeContract.View {
     public void updateSearchViewFromChips() {
         StringBuilder searchFromChips = new StringBuilder();
 
-        if (chipHouse.isChecked()) searchFromChips.append(chipHouse.getText()).append(" ");
-        if (chipApartment.isChecked()) searchFromChips.append(chipApartment.getText()).append(" ");
-        if (chipGarage.isChecked()) searchFromChips.append(chipGarage.getText()).append(" ");
-        if (chipOffice.isChecked()) searchFromChips.append(chipOffice.getText()).append(" ");
-        if (chipLandAndLots.isChecked())
-            searchFromChips.append(chipLandAndLots.getText()).append(" ");
+        int checkedChipId = chipGroup.getCheckedChipId();
+        if (checkedChipId != View.NO_ID) {
+            Chip selectedChip = chipGroup.findViewById(checkedChipId);
+            searchFromChips.append(selectedChip.getText()).append(" ");
+        }
 
         String chipContent = searchFromChips.toString().trim();
         searchView.setQuery(chipContent, false);

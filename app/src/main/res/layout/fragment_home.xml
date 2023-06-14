@@ -54,7 +54,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
                     android:paddingStart="32dp"
-                    android:paddingEnd="32dp">
+                    android:paddingEnd="32dp"
+                    app:singleSelection="true">
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chip_category1"
@@ -144,8 +145,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_catalog"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
+                android:layout_height="match_parent"
                 tools:itemCount="3"
                 tools:listitem="@layout/item_product" />
 
