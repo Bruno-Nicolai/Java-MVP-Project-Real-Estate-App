@@ -71,6 +71,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/btn_profile"
         style="@style/Theme.Imob.MoreMenuOptionsCardView"
         app:cardElevation="8dp"
         app:contentPaddingBottom="10dp"

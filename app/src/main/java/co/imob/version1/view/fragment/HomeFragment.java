@@ -46,12 +46,6 @@ public class HomeFragment extends Fragment implements HomeContract.View/*, HomeF
 
     private Chip chipHouse, chipApartment, chipGarage, chipOffice, chipLandAndLots;
 
-/*
-    public interface LikedStatusChangeListener {
-        void onLikedStatusChanged(int productId, boolean isLiked);
-    }
-*/
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
@@ -63,7 +57,6 @@ public class HomeFragment extends Fragment implements HomeContract.View/*, HomeF
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         presenter = new HomePresenter(this);
-//        presenter.setLikedStatusChangeListener(this);
         presenter.getAllProducts();
 
         toolbar = view.findViewById(R.id.tb_main);
@@ -208,14 +201,5 @@ public class HomeFragment extends Fragment implements HomeContract.View/*, HomeF
         homeAdapter.setSelectedChipsTexts(presenter.getSelectedChipContent());
         rv_home.setAdapter(homeAdapter);
     }
-
-/*
-    @Override
-    public void onLikedStatusChanged(int productId, boolean isLiked) {
-        if (homeAdapter != null) {
-            homeAdapter.setLikedProducts(likedProducts);
-        }
-    }
-*/
 
 }

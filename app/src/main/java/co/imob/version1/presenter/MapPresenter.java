@@ -40,6 +40,7 @@ public class MapPresenter implements MapContract.Presenter {
             view.getCurrentLocation();
         } else {
             view.requestLocationPermissions();
+            view.getCurrentLocation();
         }
     }
 

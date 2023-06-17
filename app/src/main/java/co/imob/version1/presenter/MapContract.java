@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
 
 public interface MapContract {
 
@@ -20,6 +21,8 @@ public interface MapContract {
         void showLastKnownLocation(@Nullable Location location);
         void onMapReady(@NonNull GoogleMap googleMap);
         void getCurrentLocation();
+        void getNewLocation(double lat, double lng);
+        void animateCameraToLocation(LatLng destinationLatLng);
     }
 
     interface Presenter {

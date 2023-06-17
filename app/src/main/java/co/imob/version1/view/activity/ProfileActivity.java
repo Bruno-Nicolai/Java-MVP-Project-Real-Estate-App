@@ -1,4 +1,4 @@
-package co.imob.version1;
+package co.imob.version1.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,9 +7,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
+import co.imob.version1.R;
 import co.imob.version1.presenter.ProfileContract;
 import co.imob.version1.presenter.ProfilePresenter;
-import co.imob.version1.view.activity.LoginActivity;
 
 public class ProfileActivity extends AppCompatActivity implements ProfileContract.View {
 

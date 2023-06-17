@@ -15,6 +15,8 @@ public interface MoreContract {
 
         void displayUsername();
 
+        void goToProfileActivity();
+
         Context getContext();
 
     }

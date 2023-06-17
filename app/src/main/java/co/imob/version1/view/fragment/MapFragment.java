@@ -20,11 +20,13 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -56,7 +58,18 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, MapCont
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_map, container, false);
+        View view = inflater.inflate(R.layout.fragment_map, container, false);
+
+        Bundle arguments = getArguments();
+        if (arguments != null) {
+            lat = arguments.getDouble("lat");
+            lng = arguments.getDouble("lng");
+
+            getNewLocation(lat, lng);
+        }
+
+        return view;
+
     }
 
     @Override
@@ -104,6 +117,36 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, MapCont
         LatLng latLng = new LatLng(lat, lng);
         googleMap.addMarker(new MarkerOptions().position(latLng).title("Your location"));
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+    }
+
+    @Override
+    public void getNewLocation(double lat, double lng) {
+        LatLng destinationLatLng = new LatLng(lat, lng);
+        animateCameraToLocation(destinationLatLng);
+
+    }
+
+    @Override
+    public void animateCameraToLocation(LatLng destinationLatLng) {
+        if (googleMap != null) {
+            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+            builder.include(new LatLng(lat, lng)); // Include current location
+            builder.include(destinationLatLng);
+            LatLngBounds bounds = builder.build();
+
+            int padding = 100;
+            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+
+            googleMap.animateCamera(cameraUpdate, new GoogleMap.CancelableCallback() {
+                @Override
+                public void onFinish() {
+                }
+
+                @Override
+                public void onCancel() {
+                }
+            });
+        }
     }
 
     @Override

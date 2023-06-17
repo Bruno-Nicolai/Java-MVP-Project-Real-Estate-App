@@ -3,6 +3,7 @@ package co.imob.version1.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -23,12 +28,12 @@ import java.util.List;
 import co.imob.version1.R;
 import co.imob.version1.model.Product;
 import co.imob.version1.view.activity.DetailsActivity;
+import co.imob.version1.view.fragment.MapFragment;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> implements Filterable {
 
     List<Product> products;
     List<Product> filteredProducts;
-//    List<Integer> likedProducts;
 
     private List<String> selectedChipsTexts;
 
@@ -37,7 +42,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public ProductAdapter(List<Product> products, List<String> selectedChipTexts) {
         this.products = products;
         filteredProducts = new ArrayList<>(products);
-//        likedProducts = new ArrayList<>();
         this.selectedChipsTexts = selectedChipTexts;
     }
 
@@ -56,22 +60,26 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         String imageUrl = currentProduct.getPictures().get(0);
         Picasso.get().load(imageUrl).into((ImageView) holder.view.findViewById(R.id.iv_picture));
 
-/*
-        if (likedProducts.contains(currentProduct.getId())) {
-            ((ImageView) holder.view.findViewById(R.id.iv_heart)).setImageResource(R.drawable.ic_baseline_favorite_24);
-            ((ImageView) holder.view.findViewById(R.id.iv_heart))
-                    .setColorFilter(ContextCompat.getColor(holder.itemView.getContext(), R.color.fav_color), PorterDuff.Mode.SRC_IN);
-        } else {
-            ((ImageView) holder.view.findViewById(R.id.iv_heart)).setImageResource(R.drawable.ic_baseline_favorites_24);
-            ((ImageView) holder.view.findViewById(R.id.iv_heart)).setColorFilter(null);
-        }
-*/
-
         ((TextView) holder.view.findViewById(R.id.main_tv_title)).setText(currentProduct.getTitle());
         ((TextView) holder.view.findViewById(R.id.tv_price)).setText(currentProduct.getPrice());
         ((TextView) holder.view.findViewById(R.id.tv_address_city)).setText(currentProduct.getAddress().getCity());
         ((TextView) holder.view.findViewById(R.id.tv_address_street)).setText(currentProduct.getAddress().getStreet());
         ((TextView) holder.view.findViewById(R.id.tv_description)).setText(currentProduct.getDescription());
+
+        ((ImageView) holder.view.findViewById(R.id.iv_marker)).setOnClickListener(view -> {
+            if (currentProduct.getAddress().getGeo().getLat() != null
+            && currentProduct.getAddress().getGeo().getLng() != null){
+                Bundle bundle = new Bundle();
+                bundle.putDouble("lat", currentProduct.getAddress().getGeo().getLat());
+                bundle.putDouble("lng", currentProduct.getAddress().getGeo().getLng());
+
+                MapFragment fragment = new MapFragment();
+                fragment.setArguments(bundle);
+
+                NavController navController = Navigation.findNavController(view);
+                navController.navigate(R.id.menu_gps, bundle);
+            }
+        });
 
         holder.view.setOnClickListener(view -> {
             Intent intent = new Intent(context, DetailsActivity.class);
@@ -156,13 +164,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public void setSelectedChipsTexts(List<String> selectedChipsTexts) {
         this.selectedChipsTexts = selectedChipsTexts;
     }
-
-/*
-    public void setLikedProducts(List<Integer> likedProducts) {
-        this.likedProducts = likedProducts;
-        notifyDataSetChanged();
-    }
-*/
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
