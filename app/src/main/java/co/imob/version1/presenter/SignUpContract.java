@@ -2,10 +2,9 @@ package co.imob.version1.presenter;
 
 import android.content.Context;
 
-import co.imob.version1.model.Auth;
-
 public interface SignUpContract {
     interface View {
+
         void showNameError(String errorMessage);
 
         void showEmailError(String errorMessage);
@@ -14,17 +13,29 @@ public interface SignUpContract {
 
         void showConfirmPasswordError(String errorMessage);
 
-        void goToLoginActivity();
+        void goToMainActivity();
 
         void showToast(String message);
 
         Context getContext();
+
     }
 
     interface Presenter {
+
+        void signupUser(String email, String password);
+
         boolean validateSignUpForm(String name, String email, String password, String confirmPassword);
 
-        void saveUser(Auth user);
+        boolean isValidEmail(String email);
+
+        void saveCredentials(String email, String password);
+
+        void clearCredentials();
+
+        void loadSavedCredentials();
+
+        void onDestroy();
 
     }
 }

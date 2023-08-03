@@ -10,7 +10,6 @@ import co.imob.version1.adapter.ProductAdapter;
 import co.imob.version1.model.Product;
 import co.imob.version1.repository.ProductRepository;
 import co.imob.version1.service.ProductService;
-import co.imob.version1.view.fragment.HomeFragment;
 
 public class HomePresenter implements HomeContract.Presenter {
 

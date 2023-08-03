@@ -14,7 +14,6 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import co.imob.version1.R;
-import co.imob.version1.model.Auth;
 import co.imob.version1.presenter.MoreContract;
 import co.imob.version1.presenter.MorePresenter;
 import co.imob.version1.view.activity.ProfileActivity;
@@ -49,9 +48,9 @@ public class MoreFragment extends Fragment implements MoreContract.View {
 
     @Override
     public void displayUsername() {
-        Auth user = presenter.getUser();
-        String name = user.getName();
-        username.setText(name);
+//        Auth user = presenter.getUser();
+//        String name = user.getName();
+//        username.setText(name);
     }
 
     @Override

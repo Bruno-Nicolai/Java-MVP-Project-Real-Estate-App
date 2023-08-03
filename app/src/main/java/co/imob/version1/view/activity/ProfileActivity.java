@@ -1,11 +1,11 @@
 package co.imob.version1.view.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import co.imob.version1.R;
 import co.imob.version1.presenter.ProfileContract;
@@ -35,7 +35,7 @@ public class ProfileActivity extends AppCompatActivity implements ProfileContrac
 
     @Override
     public void goToLoginActivity() {
-        Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
+        Intent intent = new Intent(ProfileActivity.this, IntroActivity.class);
         startActivity(intent);
         finish();
     }

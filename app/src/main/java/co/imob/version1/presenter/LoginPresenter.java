@@ -2,36 +2,51 @@ package co.imob.version1.presenter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Patterns;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import co.imob.version1.R;
-import co.imob.version1.service.LoginCallback;
-import co.imob.version1.service.LoginService;
 
-public class LoginPresenter implements LoginContract.Presenter, LoginCallback {
+public class LoginPresenter implements LoginContract.Presenter {
 
-    private LoginContract.View view;
-    private LoginService loginService;
-    private SharedPreferences sharedPreferences;
+    private final LoginContract.View view;
+    private final SharedPreferences sharedPreferences;
+    private final FirebaseAuth auth;
 
     public LoginPresenter(LoginContract.View view) {
         this.view = view;
-        loginService = new LoginService();
-        sharedPreferences = view.getContext()
+        this.sharedPreferences = view.getContext()
                 .getSharedPreferences(view.getContext().getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        this.auth = FirebaseAuth.getInstance();
     }
 
     @Override
     public void loginUser(String email, String password) {
-        loginService.loginUser(email, password, this);
+        auth.signInWithEmailAndPassword(email, password)
+                .addOnSuccessListener(authResult -> {
+                    view.showToast("Logged In Successfully!");
+                    view.goToMainActivity();
+                })
+                .addOnFailureListener(e -> {
+                    view.showToast("Login Failure; " + e.getMessage());
+                });
     }
 
     @Override
     public void validateEmail(String email) {
         if (email.isEmpty()) {
-            view.showEmailError("Invalid Email Address.");
+            view.showEmailError("Please, enter your email.");
+        } else if (!isValidEmail(email)) {
+            view.showEmailError("There was an issue during the login attempt.");
         } else {
             view.showEmailError(null);
         }
+    }
+
+    @Override
+    public boolean isValidEmail(String email) {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     @Override
@@ -75,13 +90,4 @@ public class LoginPresenter implements LoginContract.Presenter, LoginCallback {
     public void onDestroy() {
     }
 
-    @Override
-    public void onLoginSuccess() {
-        view.goToMainActivity();
-    }
-
-    @Override
-    public void onLoginFailure(String errorMessage) {
-        view.showPasswordError(errorMessage);
-    }
 }

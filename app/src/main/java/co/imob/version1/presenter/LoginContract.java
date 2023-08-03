@@ -17,16 +17,19 @@ public interface LoginContract {
 
         void goToMainActivity();
 
-        void goToSignupActivity();
+        void showToast(String message);
 
         Context getContext();
 
     }
 
     interface Presenter {
+
         void loginUser(String email, String password);
 
         void validateEmail(String email);
+
+        boolean isValidEmail(String email);
 
         void validatePassword(String password);
 
@@ -37,5 +40,6 @@ public interface LoginContract {
         void loadSavedCredentials();
 
         void onDestroy();
+
     }
 }

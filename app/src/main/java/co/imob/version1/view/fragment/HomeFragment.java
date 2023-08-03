@@ -25,10 +25,10 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
-import co.imob.version1.R;
 import co.imob.version1.adapter.ProductAdapter;
 import co.imob.version1.presenter.HomeContract;
 import co.imob.version1.presenter.HomePresenter;
+import co.imob.version1.R;
 
 public class HomeFragment extends Fragment implements HomeContract.View/*, HomeFragment.LikedStatusChangeListener*/ {
 

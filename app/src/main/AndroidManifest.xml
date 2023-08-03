@@ -18,19 +18,16 @@
         android:theme="@style/Theme.Imob"
         tools:targetApi="33">
         <activity
+            android:name=".view.activity.IntroActivity"
+            android:exported="false"></activity>
+        <activity
             android:name=".view.activity.ProfileActivity"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".view.activity.DetailsActivity"
             android:exported="false"></activity>
         <activity
             android:name=".view.activity.MainActivity"
-            android:exported="false"></activity>
-        <activity
-            android:name=".view.activity.LoginActivity"
-            android:exported="false"></activity>
-        <activity
-            android:name=".view.activity.SignUpActivity"
             android:exported="false"></activity>
         <activity
             android:name=".view.activity.FirstSightActivity"
@@ -39,8 +36,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            </intent-filter></activity>
 
         <meta-data
             android:name="com.google.android.gms.version"

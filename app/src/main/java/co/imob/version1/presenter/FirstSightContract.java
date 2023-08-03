@@ -2,8 +2,6 @@ package co.imob.version1.presenter;
 
 import android.content.Context;
 
-import co.imob.version1.model.Auth;
-
 public interface FirstSightContract {
     interface View {
 

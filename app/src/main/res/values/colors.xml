@@ -4,8 +4,10 @@
     <color name="gray">#212121</color>
     <color name="gray_lite">#C5BEBE</color>
     <color name="white">#F8F5F1</color>
+    <color name="white_light">#CBFFFFFF</color>
 
     <color name="orange">#FE6900</color>
+    <color name="orange_light">#4DFE6900</color>
     <color name="red">#FF0340</color>
     <color name="fav_color">#CC0233</color>
 </resources>

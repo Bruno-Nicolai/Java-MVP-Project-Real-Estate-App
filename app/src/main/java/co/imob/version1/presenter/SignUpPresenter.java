@@ -3,22 +3,35 @@ package co.imob.version1.presenter;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Objects;
+
 import co.imob.version1.R;
-import co.imob.version1.model.Auth;
-import co.imob.version1.service.SignUpCallback;
-import co.imob.version1.service.SignUpService;
 
-public class SignUpPresenter implements SignUpContract.Presenter, SignUpCallback {
+public class SignUpPresenter implements SignUpContract.Presenter {
 
-    private SignUpContract.View view;
-    private SignUpService signUpService;
-    private SharedPreferences sharedPreferences;
+    private final SignUpContract.View view;
+    private final SharedPreferences sharedPreferences;
+    private final FirebaseAuth auth;
 
     public SignUpPresenter(SignUpContract.View view) {
         this.view = view;
-        signUpService = new SignUpService();
         sharedPreferences = view.getContext()
                 .getSharedPreferences(view.getContext().getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        this.auth = FirebaseAuth.getInstance();
+    }
+
+    @Override
+    public void signupUser(String email, String password) {
+        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                view.showToast("Signed Up Successfully");
+                view.goToMainActivity();
+            } else {
+                view.showToast("Sign Up Failed; "+ Objects.requireNonNull(task.getException()).getMessage());
+            }
+        });
     }
 
     @Override
@@ -46,31 +59,42 @@ public class SignUpPresenter implements SignUpContract.Presenter, SignUpCallback
         }
     }
 
-    private boolean isValidEmail(String email) {
+    @Override
+    public boolean isValidEmail(String email) {
         return email.contains("@");
     }
 
     @Override
-    public void saveUser(Auth user) {
-        signUpService.registerUser(user.getName(), user.getEmail(), user.getPassword(), this);
-
+    public void saveCredentials(String email, String password) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("name", user.getName());
-        editor.putString("email", user.getEmail());
-        editor.putString("password", user.getPassword());
+        editor.putString("email", email);
+        editor.putString("password", password);
         editor.apply();
-
     }
 
     @Override
-    public void onRegisterSuccess(String message) {
-        view.showToast(message);
-        view.goToLoginActivity();
+    public void clearCredentials() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove("email");
+        editor.remove("password");
+        editor.apply();
     }
 
     @Override
-    public void onRegisterFailure(String errorMessage) {
-        view.showToast(errorMessage);
+    public void loadSavedCredentials() {
+        String savedEmail = sharedPreferences.getString("email", "");
+        String savedPassword = sharedPreferences.getString("password", "");
+
+        if (!savedEmail.isEmpty() && !savedPassword.isEmpty()) {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("name", String.valueOf(auth.getCurrentUser()));
+            editor.apply();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+
     }
 
 }

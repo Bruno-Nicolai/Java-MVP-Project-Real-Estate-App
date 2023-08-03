@@ -1,9 +1,5 @@
 package co.imob.version1.presenter;
 
-import android.content.SharedPreferences;
-
-import co.imob.version1.model.Auth;
-
 public class MainPresenter implements MainContract.Presenter {
 
     private MainContract.View view;

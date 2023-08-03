@@ -33,19 +33,18 @@ public class FirstSightActivity extends AppCompatActivity implements FirstSightC
     }
 
     @Override
-    public void showWelcomeScreen() {
+    public void showWelcomeScreen() {}
 
-    }
-
+    @Override
     public void goToLoginActivity() {
-        Intent intent = new Intent(FirstSightActivity.this, LoginActivity.class);
+        Intent intent = new Intent(FirstSightActivity.this, IntroActivity.class);
         startActivity(intent);
         finish();
     }
 
     @Override
     public void goToSignupActivity() {
-        Intent intent = new Intent(FirstSightActivity.this, SignUpActivity.class);
+        Intent intent = new Intent(FirstSightActivity.this, IntroActivity.class);
         startActivity(intent);
         finish();
     }
